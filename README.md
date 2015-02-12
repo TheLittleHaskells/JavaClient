@@ -1,2 +1,2 @@
 # JavaClient
-CMPE 150 Java Chat Client
+CMPS 112 Java Chat Client
