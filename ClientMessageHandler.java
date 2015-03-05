@@ -25,16 +25,14 @@ public class ClientMessageHandler implements Runnable{
     public void run() {
         this.running = true;
         while(running){
-
                 try {
-                    displayPrompt();
                     BufferedReader br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
                     String input = null;
                     if((input = br.readLine()) != null){
                         readMessage(input);
                     }
                 } catch (IOException e) {
-                    //Server.displayError("Trouble talking to: " + entry.getKey());
+                    displayError("Trouble talking to server");
                     e.printStackTrace();
                 }
 
@@ -75,14 +73,11 @@ public class ClientMessageHandler implements Runnable{
             // Logoff messages
         }else if(tokens[0].matches("GTFO")){
             displayUserLoggedOff(payload);
-            try {
-            }catch (Exception e){
-
-            }
 
             // Chat messages
         }else if(tokens[0].matches("CHAT")) {
             displayChatMessage( payload);
+
             // Userlist request messages
         }else {
             displayError("Invalid message received: " + msg);
@@ -99,7 +94,7 @@ public class ClientMessageHandler implements Runnable{
      */
     public static void displayUserLoggedIn(String username){
         System.out.printf("\n\t%s has logged on.", username);
-        //displayPrompt();
+        displayPrompt();
     }
 
     /**
@@ -109,7 +104,7 @@ public class ClientMessageHandler implements Runnable{
      */
     public static void displayUserLoggedOff(String username){
         System.out.printf("\n\t%s has logged off.", username);
-        //displayPrompt();
+        displayPrompt();
     }
 
     /**
@@ -119,7 +114,7 @@ public class ClientMessageHandler implements Runnable{
      */
     public static void displayChatMessage( String message){
         System.out.printf("\t%s", message);
-        //displayPrompt();
+        displayPrompt();
     }
 
     /**

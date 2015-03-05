@@ -39,13 +39,12 @@ public class Client {
         // start ui stuff
         while(true){
             try {
-                //displayPrompt();
+                displayPrompt();
                 input = br.readLine();
                 if(input.matches("/.*")){
                    // processCommand();
-
                 }else {
-                    sendMessage("CHAT",input,server);
+                    sendMessage("CHAT", input, server);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -115,7 +114,7 @@ public class Client {
         System.err.println(s);
     }
 
-    public static void sendMessage(String type,String payload, Socket client){
+    public static void sendMessage(String type, String payload, Socket client){
         String message = type + "@" + payload;
         //send message using socket
         try {
