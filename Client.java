@@ -18,9 +18,18 @@ public class Client {
     static Thread cmhThread = null;
 
     public static void main(String args[]) {
+
         // Read in config file
         parseConfig(args[0]);
 
+        sendMessage("GTFI",username,server);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run(){
+                sendMessage("GTFO",username, server);
+            }
+        });
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input;
@@ -42,7 +51,7 @@ public class Client {
                 displayPrompt();
                 input = br.readLine();
                 if(input.matches("/.*")){
-                   // processCommand();
+                    processCommand(input);
                 }else {
                     sendMessage("CHAT", input, server);
                 }
@@ -53,6 +62,16 @@ public class Client {
         }
 
     }
+
+    public static void processCommand(String command){
+        if(command.toLowerCase().matches("/list")){
+            sendMessage("LIST",username,server);
+        }
+        if(command.toLowerCase().matches("/quit")){
+            System.exit(0);
+        }
+    }
+
 
 
     /**

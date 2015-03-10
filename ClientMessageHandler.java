@@ -82,9 +82,13 @@ public class ClientMessageHandler implements Runnable{
         }else {
             displayError("Invalid message received: " + msg);
         }
+        displayPrompt();
     }
     public static void updateUserList(String list){
-        //userlist = list.split("@");
+        String [] userlist = list.split("@");
+        for(int i=0; i<userlist.length; i++){
+            System.out.println("\t\t\t"+userlist[i]);
+        }
     }
 
     /**
@@ -94,7 +98,6 @@ public class ClientMessageHandler implements Runnable{
      */
     public static void displayUserLoggedIn(String username){
         System.out.printf("\n\t%s has logged on.", username);
-        displayPrompt();
     }
 
     /**
@@ -104,7 +107,6 @@ public class ClientMessageHandler implements Runnable{
      */
     public static void displayUserLoggedOff(String username){
         System.out.printf("\n\t%s has logged off.", username);
-        displayPrompt();
     }
 
     /**
@@ -114,7 +116,6 @@ public class ClientMessageHandler implements Runnable{
      */
     public static void displayChatMessage( String message){
         System.out.printf("\t%s", message);
-        displayPrompt();
     }
 
     /**
@@ -127,15 +128,5 @@ public class ClientMessageHandler implements Runnable{
         System.err.println(s);
     }
 
-    public static void sendMessage(String type,String payload, Socket client){
-        String message = type + "@" + payload;
-        //send message using socket
-        try {
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
-            pw.println(message);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-    }
 
 }
