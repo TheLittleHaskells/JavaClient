@@ -22,15 +22,6 @@ public class Client {
         // Read in config file
         parseConfig(args[0]);
 
-        sendMessage("GTFI",username,server);
-
-        Runtime.getRuntime().addShutdownHook(new Thread(){
-            @Override
-            public void run(){
-                sendMessage("GTFO",username, server);
-            }
-        });
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String input;
         try {
@@ -44,6 +35,19 @@ public class Client {
         cmh = new ClientMessageHandler(server);
         cmhThread = new Thread(cmh);
         cmhThread.start();
+
+        sendMessage("GTFI",username,server);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run(){
+                sendMessage("GTFO",username, server);
+            }
+        });
+
+
+
+
 
         // start ui stuff
         while(true){
