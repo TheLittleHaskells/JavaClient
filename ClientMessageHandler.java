@@ -72,7 +72,8 @@ public class ClientMessageHandler implements Runnable{
 
             // Logoff messages
         }else if(tokens[0].matches("GTFO")){
-            displayUserLoggedOff(payload);
+            System.err.printf("\nServer is shutting down. Exiting program.");
+            System.exit(1);
 
             // Chat messages
         }else if(tokens[0].matches("CHAT")) {

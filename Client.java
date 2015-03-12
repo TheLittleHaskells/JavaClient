@@ -36,7 +36,7 @@ public class Client {
         cmhThread = new Thread(cmh);
         cmhThread.start();
 
-        sendMessage("GTFI",username,server);
+        sendMessage("GTFI", username, server);
 
         Runtime.getRuntime().addShutdownHook(new Thread(){
             @Override
@@ -44,10 +44,6 @@ public class Client {
                 sendMessage("GTFO",username, server);
             }
         });
-
-
-
-
 
         // start ui stuff
         while(true){
@@ -144,7 +140,10 @@ public class Client {
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
             pw.println(message);
         }catch(IOException e){
-            e.printStackTrace();
+            if(!type.matches("GTFO")) {
+                System.out.println("Trouble talking to server. Shutting down client.");
+                System.exit(1);
+            }
         }
     }
 
